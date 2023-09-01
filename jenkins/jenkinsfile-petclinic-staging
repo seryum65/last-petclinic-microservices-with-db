@@ -24,7 +24,7 @@ pipeline {
         stage('Prepare Tags for Staging Docker Images') {
             steps {
                 echo 'Preparing Tags for Staging Docker Images'
-                sh ". ./prepare-tags-ecr-for-staging-docker-images.sh"
+                sh ". ./jenkins/prepare-tags-ecr-for-staging-docker-images.sh"
                 
             }
         }
