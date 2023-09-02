@@ -25,7 +25,7 @@ pipeline {
             steps {
                 echo 'Preparing Tags for Production Docker Images'
                 sh ". ./jenkins/prepare-tags-ecr-for-prod-docker-images.sh"
-                }
+
             }
         }
         stage('Build App Production Docker Images') {
