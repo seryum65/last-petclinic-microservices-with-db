@@ -2457,8 +2457,8 @@ DNS_NAME: "DNS Name of your application"
 * Create an ``S3 bucket`` for Helm charts. In the bucket, create a ``folder`` called ``stable/myapp``. The example in this pattern uses s3://petclinic-helm-charts-<put-your-name>/stable/myapp as the target chart repository.
 
 ```bash
-aws s3api create-bucket --bucket petclinic-helm-charts-<put-your-name> --region us-east-1
-aws s3api put-object --bucket petclinic-helm-charts-<put-your-name> --key stable/myapp/
+aws s3api create-bucket --bucket petclinic-helm-charts-seryum --region us-east-1
+aws s3api put-object --bucket petclinic-helm-charts-seryum --key stable/myapp/
 ```
 
 * Install the helm-s3 plugin for Amazon S3.
@@ -2479,7 +2479,7 @@ helm plugin install https://github.com/hypnoglow/helm-s3.git
 * ``Initialize`` the Amazon S3 Helm repository.
 
 ```bash
-AWS_REGION=us-east-1 helm s3 init s3://petclinic-helm-charts-<put-your-name>/stable/myapp 
+AWS_REGION=us-east-1 helm s3 init s3://petclinic-helm-charts-seryum/stable/myapp 
 ```
 
 * The command creates an ``index.yaml`` file in the target to track all the chart information that is stored at that location.
@@ -2487,14 +2487,14 @@ AWS_REGION=us-east-1 helm s3 init s3://petclinic-helm-charts-<put-your-name>/sta
 * Verify that the ``index.yaml`` file was created.
 
 ```bash
-aws s3 ls s3://petclinic-helm-charts-<put-your-name>/stable/myapp/
+aws s3 ls s3://petclinic-helm-charts-seryum/stable/myapp/
 ```
 
 * Add the Amazon S3 repository to Helm on the client machine. 
 
 ```bash
 helm repo ls
-AWS_REGION=us-east-1 helm repo add stable-petclinicapp s3://petclinic-helm-charts-<put-your-name>/stable/myapp/
+AWS_REGION=us-east-1 helm repo add stable-petclinicapp s3://petclinic-helm-charts-seryum/stable/myapp/
 ```
 
 * Update `version` and `appVersion` field of `k8s/petclinic_chart/Chart.yaml` file as below for testing.
@@ -3658,7 +3658,7 @@ echo \
 # Update packages
 sudo apt-get update
 
-# Install and start Docker
+# Install and start Docker (UYARI!!! bu handsone da rancher, dockerın en son versiyonu ile çalışmıyor. docker kurarken 20.10.*** ve aşağı versiyonları ile çalış. )
 sudo apt-get install docker-ce docker-ce-cli containerd.io
 sudo systemctl start docker
 sudo systemctl enable docker
@@ -3706,7 +3706,7 @@ Target group        : `call-rancher-http-80-tg` target group
 * Install RKE, the Rancher Kubernetes Engine, [Kubernetes distribution and command-line tool](https://rancher.com/docs/rke/latest/en/installation/)) on Jenkins Server.
 
 ```bash
-curl -SsL "https://github.com/rancher/rke/releases/download/v1.3.12/rke_linux-amd64" -o "rke_linux-amd64"
+curl -SsL "https://github.com/rancher/rke/releases/download/v1.4.5/rke_linux-amd64" -o "rke_linux-amd64"
 sudo mv rke_linux-amd64 /usr/local/bin/rke
 chmod +x /usr/local/bin/rke
 rke --version
@@ -3716,8 +3716,8 @@ rke --version
 
 ```yml
 nodes:
-  - address: 172.31.82.64
-    internal_address: 172.31.82.64
+  - address: 172.31.88.66
+    internal_address: 172.31.88.66
     user: ubuntu
     role:
       - controlplane
@@ -3732,7 +3732,7 @@ services:
     creation: 6h
     retention: 24h
 
-ssh_key_path: ~/.ssh/petclinic-rancher.pem
+ssh_key_path: ~/.ssh/petclinic-ranchertr.pem
 
 # Required for external TLS termination with
 # ingress-nginx v0.22+
@@ -3798,7 +3798,7 @@ kubectl create namespace cattle-system
 ```bash
 helm install rancher rancher-latest/rancher \
   --namespace cattle-system \
-  --set hostname=rancher.clarusway.us \
+  --set hostname=rancher.yusufsahin.link \
   --set tls=external \
   --set replicas=1
 ```

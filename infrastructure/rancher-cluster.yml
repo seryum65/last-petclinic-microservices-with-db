@@ -1,6 +1,6 @@
 nodes:
-  - address: 172.31.73.21
-    internal_address: 172.31.73.21
+  - address: 172.31.86.209
+    internal_address: 172.31.86.209
     user: ubuntu
     role:
       - controlplane
@@ -15,7 +15,7 @@ services:
     creation: 6h
     retention: 24h
 
-ssh_key_path: ~/.ssh/petclinic-rancher.pem
+ssh_key_path: ~/.ssh/petclinic-ranchertr.pem
 
 # Required for external TLS termination with
 # ingress-nginx v0.22+
